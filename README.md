@@ -6,6 +6,6 @@ Repository for Software Design Ninjas
 
 Requires GitPython
 
-```
-pip install gitpython
+``` 
+[sudo] pip install gitpython
 ```
