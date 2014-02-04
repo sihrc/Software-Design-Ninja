@@ -1,59 +1,76 @@
 from git import Repo
 import os, shutil
 
-urls =["https://github.com/acejang1994/SoftwareDesign", "https://github.com/aloverso/SoftwareDesign", "https://github.com/AmandaSutherland/SoftwareDesign", "https://github.com/atproofer/SoftwareDesign", "https://github.com/bishiguro/SoftwareDesign", "https://github.com/cbauerswald/SoftwareDesign", "https://github.com/cebeery/SoftwareDesign", "https://github.com/cwallac/SoftwareDesign", "https://github.com/daouani/SoftwareDesign", "https://github.com/dcelik/SoftwareDesign", "https://github.com/ddiggins/SoftwareDesign", "https://github.com/dennis-chen/SoftwareDesign", "https://github.com/dimitdim/SoftwareDesign", "https://github.com/dinopants174/SoftwareDesign", "https://github.com/doyunglee/SoftwareDesign", "https://github.com/eengel/SoftwareDesign", "https://github.com/emocallaghan/SoftwareDesign", "https://github.com/flymperopoulos/SoftwareDesign", "https://github.com/gabriellee/SoftwareDesign", "https://github.com/gregcole/SoftwareDesign", "https://github.com/griffint/SoftwareDesign", "https://github.com/gubbatuba/SoftwareDesign", "https://github.com/hpelletier/SoftwareDesign", "https://github.com/HWilk/SoftwareDesign", "https://github.com/hzhugit/SoftwareDesign", "https://github.com/iangmhill/SoftwareDesign", "https://github.com/InseongJoe/SoftwareDesign", "https://github.com/jabb1123/SoftwareDesign", "https://github.com/jagreene/SoftwareDesign", "https://github.com/JenniferLVaccaro/SoftwareDesign", "https://github.com/jenwei/SoftwareDesign", "https://github.com/jmorris1993/SoftwareDesign", "https://github.com/jsapers/SoftwareDesign", "https://github.com/jwoo1123/SoftwareDesign", "https://github.com/ksuzy31/SoftwareDesign", "https://github.com/kyflores/SoftwareDesign", "https://github.com/logandavis/SoftwareDesign", "https://github.com/lvanderlyn/SoftwareDesign", "https://github.com/mafaldaborges/SoftwareDesign", "https://github.com/maorbernstein/SoftwareDesign", "https://github.com/MJAFort/SoftwareDesign", "https://github.com/mortier/SoftwareDesign", "https://github.com/ndhanushkodi/SoftwareDesign", "https://github.com/pencilEraser/SoftwareDesign", "https://github.com/PMKeene/SoftwareDesign", "https://github.com/Pratool/SoftwareDesign", "https://github.com/ptitchener/SoftwareDesign", "https://github.com/RRameshwar/SoftwareDesign", "https://github.com/runnersaw/SoftwareDesign", "https://github.com/rvanderheyde/SoftwareDesign", "https://github.com/segerphilip/SoftwareDesign", "https://github.com/SeongHyeok/SoftwareDesign", "https://github.com/sgrim3/SoftwareDesign", "https://github.com/shrinidhit/SoftwareDesign", "https://github.com/srli/SoftwareDesign", "https://github.com/ssingal05/SoftwareDesign", "https://github.com/swalters4925/SoftwareDesign", "https://github.com/themythicaldrago/SoftwareDesign", "https://github.com/yunhsincynthiachen/SoftwareDesign"]
-
-def test_urls (urls):
+def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
 	"""
 	Test whether or not the urls are valid
 	"""
 	import urllib2
 
-	failed = []
-	for each in urls:
+	failed = [] # keep track of failed user ids
+	
+	for uid in users:
 		try:
-			urllib2.urlopen(each)
+			urllib2.urlopen(url % uid)
 		except:
-			failed.append(each)
-			print each + " has failed to load"
-	print "loaded " + str(len(urls) - len(failed)) + " of " + str(len(urls)) + " successfully"
-	print failed
+			failed.append(uid)
+			print uid + " has failed to load"
+	
+	print "Loaded %i of %i successfully" % (len(users) - len(failed), len(users))
+	print "Failed user ids: %s" % failed
 
-def get_username(url):
-	"""
-	Extracts the username of the student from the github url
-	"""
-	return url[url.find("com/") + 4:url.find("/SoftwareDesign")]
+# unnecessary since json-ing the usernames.
+# def get_username(url):
+# 	"""
+# 	Extracts the username of the student from the github url
+# 	"""
+# 	return url[url.find("com/") + 4:url.find("/SoftwareDesign")]
 
-def clone_repos(urls):
+
+def clone_repos(users, syspath="../repos/", url="https://github.com/%s/SoftwareDesign"):
 	"""
 	Recursively removes previous copies of the repo (requires user confirmation)
 	Clones the repos from the urls to a folder called repos/<username>
+
+		users : list of github ids
+		syspath : system path to copy repos to
 	"""
-	if (raw_input("Remove current repositories?")) != "y":
-		return "Failed"
-	shutil.rmtree("../repos/")
-	for url in urls:
-		name = get_username(url)
-		path = "../repos/" + name
-		print "Cloning Repo: ", url, "\n to ", path
+	if (raw_input("Remove current repositories? (y/n) ")) != "y":
+		raise Exception("Failed to confirm. Failed to clone repos")
+	
+	# if other repos exist, remove them
+	if os.path.exists(syspath):
+		shutil.rmtree(syspath) # remove existing repos
+		print "Successfully removed repos from \"%s\"" % syspath
+
+	for uid in users:
+		path = syspath + uid
+		repo_url = url + ".git"
+		
+		print "Cloning Repo: %s to %s" % (uid, path)
+
 		if not os.path.exists(path):
 			os.makedirs(path)
-		Repo.clone_from(url + ".git", "../repos/" + name)
-	return "Successful"
+		
+		Repo.clone_from(url % uid, path)
 
-def pull_repos():
+	print "Successfully cloned repos"
+
+def pull_repos(syspath="../repos/"):
 	"""
-	Pulls from remote for all directories under "../repos/"
+	Pulls from remote for all directories under syspath
 	"""
-	home = "../repos/"
-	for fold in os.listdir(home):
+	for fold in os.listdir(syspath):
 		print "Pulling Repo for ", fold
-		repo = Repo(os.path.join(home,fold))
+		repo = Repo(os.path.join(syspath,fold))
+
 		o = repo.remotes.origin
 		o.pull()
 
-
 if __name__ == "__main__":
-	#print clone_repos(urls)
-	pull_repos()
+	# all users
+	users =["acejang1994", "aloverso", "AmandaSutherland", "atproofer", "bishiguro", "cbauerswald", "cebeery", "cwallac", "daouani", "dcelik", "ddiggins", "dennis-chen", "dimitdim", "dinopants174", "doyunglee", "eengel", "emocallaghan", "flymperopoulos", "gabriellee", "gregcole", "griffint", "gubbatuba", "hpelletier", "HWilk", "hzhugit", "iangmhill", "InseongJoe", "jabb1123", "jagreene", "JenniferLVaccaro", "jenwei", "jmorris1993", "jsapers", "jwoo1123", "ksuzy31", "kyflores", "logandavis", "lvanderlyn", "mafaldaborges", "maorbernstein", "MJAFort", "mortier", "ndhanushkodi", "pencilEraser", "PMKeene", "Pratool", "ptitchener", "RRameshwar", "runnersaw", "rvanderheyde", "segerphilip", "SeongHyeok", "sgrim3", "shrinidhit", "srli", "ssingal05", "swalters4925", "themythicaldrago", "yunhsincynthiachen"]
+	print "Current Number of repos: ", len(users)
+
+	# test_urls(users)
+	# clone_repos(users) # currently having issues with creating repos directory
