@@ -65,4 +65,27 @@ if __name__ == "__main__":
 	print "Current Number of repos: ", len(users)
 
 	# test_urls(users)
-	# clone_repos(users) # currently having issues with creating repos directory
+	# clone_repos(users)
+
+	from names import family
+
+	matches = []
+	nonMatches = []
+
+	matchCount = 0
+	nonMatchCount = 0
+
+	for n in family:
+		uid = n.split()[-1]
+		if uid in users:
+			matches.append(uid)
+			matchCount += 1
+			users.remove(uid)
+		else:
+			nonMatches.append(uid)
+			nonMatchCount += 1
+
+	print "Number matched: ", matchCount
+	print "Number unmatched: ", nonMatchCount
+	print "nonMatches: ", nonMatches
+	print "students who haven't forked: ", users
