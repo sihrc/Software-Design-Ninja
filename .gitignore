@@ -2,7 +2,8 @@
 repos/
 # C extensions
 *.so
-
+*.csv
+*.json
 # Packages
 *.egg
 *.egg-info

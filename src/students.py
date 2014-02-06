@@ -1,0 +1,3 @@
+groupD = {'Hannah Wilk': 'HWilk', 'Siddharth Singal': "ssingal05", 'James Woo': 'jwoo11', 'Griffin Tschurwald': "griffint", 'Inseong Joe': 'InseongJoe', 'Anne LoVerso': "aloverso", 'Raagini Rameshwar': 'RRameshwar', 'Filipps Lymperopoulos': "flymperopoulos", 'Sawyer Vaughan': 'runnersaw', 'Lindsey Vanderlyn': "lvanderlyn", 'Shrinidhi Thirumalai': "shrinidhit", 'Philip Seger': 'segerphilip', "Elizabeth O'Callaghan": "emocallaghan"}
+
+missing = ["DannyKang", "Duncan Michael"]
