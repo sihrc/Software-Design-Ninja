@@ -20,7 +20,7 @@ def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
   print "Loaded %i of %i successfully" % (len(users) - len(failed), len(users))
   print "Failed user ids: %s" % failed
 
-def clone_repos(users, syspath="../repos/", url="https://github.com/%s/SoftwareDesign"):
+def clone_repos(users, syspath=os.path.join("..","repos"), url="https://github.com/%s/SoftwareDesign"):
   """
   Recursively removes previous copies of the repo (requires user confirmation)
   Clones the repos from the urls to a folder called repos/<username>
@@ -38,18 +38,17 @@ def clone_repos(users, syspath="../repos/", url="https://github.com/%s/SoftwareD
 
   for uid in users:
 	path = syspath + uid
-	repo_url = url + ".git"
-	
+
 	print "Cloning Repo: %s to %s" % (uid, path)
 
 	if not os.path.exists(path):
 	  os.makedirs(path)
 	
-	Repo.clone_from(url % uid, path)
+	Repo.clone_from(url % (uid + ".git"), path)
 
   print "Successfully cloned repos"
 
-def pull_repos(syspath="../repos/"):
+def pull_repos(syspath=os.path.join("..","repos")):
   """
   Pulls from remote for all directories under syspath
   """
@@ -72,8 +71,8 @@ def levenshtein(s1, s2):
     for i, c1 in enumerate(s1):
         current_row = [i + 1]
         for j, c2 in enumerate(s2):
-            insertions = previous_row[j + 1] + 1 # j+1 instead of j since previous_row and current_row are one character longer
-            deletions = current_row[j] + 1       # than s2
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1      
             substitutions = previous_row[j] + (c1 != c2)
             current_row.append(min(insertions, deletions, substitutions))
         previous_row = current_row
