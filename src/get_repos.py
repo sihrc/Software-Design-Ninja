@@ -1,5 +1,6 @@
 from git import Repo
 import os, shutil
+from models import *
 
 def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
   """
@@ -69,8 +70,8 @@ def pull_repos(syspath="../repos/"):
 
 if __name__ == "__main__":
   # all users
-  users =["acejang1994", "aloverso", "AmandaSutherland", "atproofer", "bishiguro", "cbauerswald", "cebeery", "cwallac", "daouani", "dcelik", "ddiggins", "dennis-chen", "dimitdim", "dinopants174", "doyunglee", "eengel", "emocallaghan", "flymperopoulos", "gabriellee", "gregcole", "griffint", "gubbatuba", "hpelletier", "HWilk", "hzhugit", "iangmhill", "InseongJoe", "jabb1123", "jagreene", "JenniferLVaccaro", "jenwei", "jmorris1993", "jsapers", "jwoo1123", "ksuzy31", "kyflores", "logandavis", "lvanderlyn", "mafaldaborges", "maorbernstein", "MJAFort", "mortier", "ndhanushkodi", "pencilEraser", "PMKeene", "Pratool", "ptitchener", "RRameshwar", "runnersaw", "rvanderheyde", "segerphilip", "SeongHyeok", "sgrim3", "shrinidhit", "srli", "ssingal05", "swalters4925", "themythicaldrago", "yunhsincynthiachen"]
-  print "Current Number of repos: ", len(users)
+  # users =["acejang1994", "aloverso", "AmandaSutherland", "atproofer", "bishiguro", "cbauerswald", "cebeery", "cwallac", "daouani", "dcelik", "ddiggins", "dennis-chen", "dimitdim", "dinopants174", "doyunglee", "eengel", "emocallaghan", "flymperopoulos", "gabriellee", "gregcole", "griffint", "gubbatuba", "hpelletier", "HWilk", "hzhugit", "iangmhill", "InseongJoe", "jabb1123", "jagreene", "JenniferLVaccaro", "jenwei", "jmorris1993", "jsapers", "jwoo1123", "ksuzy31", "kyflores", "logandavis", "lvanderlyn", "mafaldaborges", "maorbernstein", "MJAFort", "mortier", "ndhanushkodi", "pencilEraser", "PMKeene", "Pratool", "ptitchener", "RRameshwar", "runnersaw", "rvanderheyde", "segerphilip", "SeongHyeok", "sgrim3", "shrinidhit", "srli", "ssingal05", "swalters4925", "themythicaldrago", "yunhsincynthiachen"]
+  # print "Current Number of repos: ", len(users)
 
   # test_urls(users)
   # clone_repos(users)
@@ -99,25 +100,31 @@ if __name__ == "__main__":
     json.dump(students, f)
 
 
-  from names import family
+  # from names import family
 
-  matches = []
-  nonMatches = []
+  # matches = []
+  # nonMatches = []
 
-  matchCount = 0
-  nonMatchCount = 0
+  # matchCount = 0
+  # nonMatchCount = 0
 
-  for n in family:
-    uid = n.split()[-1]
-    if uid in users:
-      matches.append(uid)
-      matchCount += 1
-      users.remove(uid)
-    else:
-      nonMatches.append(uid)
-      nonMatchCount += 1
+  # for n in family:
+  #   uid = n.split()[-1]
+  #   if uid in users:
+  #     matches.append(uid)
+  #     matchCount += 1
+  #     users.remove(uid)
+  #   else:
+  #     nonMatches.append(uid)
+  #     nonMatchCount += 1
 
-  print "Number matched: ", matchCount
-  print "Number unmatched: ", nonMatchCount
-  print "nonMatches: ", nonMatches
-  print "students who haven't forked: ", users
+  # print "Number matched: ", matchCount
+  # print "Number unmatched: ", nonMatchCount
+  # print "nonMatches: ", nonMatches
+  # print "students who haven't forked: ", users
+
+  with open('mystudents.json', 'rb') as f:
+    students = json.load(f)
+
+  clone_repos([key for key in students.keys()])
+
