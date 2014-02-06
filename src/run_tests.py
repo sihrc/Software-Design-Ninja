@@ -9,7 +9,7 @@ class Tester:
 		self.cases = cases
 
 	def addArgs (self, result, **args):
-		return **args
+		return args
 
 
 if __name__ == "__main__":
