@@ -20,14 +20,6 @@ def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
   print "Loaded %i of %i successfully" % (len(users) - len(failed), len(users))
   print "Failed user ids: %s" % failed
 
-# unnecessary since json-ing the usernames.
-# def get_username(url):
-#   """
-#   Extracts the username of the student from the github url
-#   """
-#   return url[url.find("com/") + 4:url.find("/SoftwareDesign")]
-
-
 def clone_repos(users, syspath="../repos/", url="https://github.com/%s/SoftwareDesign"):
   """
   Recursively removes previous copies of the repo (requires user confirmation)
