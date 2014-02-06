@@ -1,3 +1,3 @@
-groupD = {'Hannah Wilk': 'HWilk', 'Siddharth Singal': "ssingal05", 'James Woo': 'jwoo11', 'Griffin Tschurwald': "griffint", 'Inseong Joe': 'InseongJoe', 'Anne LoVerso': "aloverso", 'Raagini Rameshwar': 'RRameshwar', 'Filipps Lymperopoulos': "flymperopoulos", 'Sawyer Vaughan': 'runnersaw', 'Lindsey Vanderlyn': "lvanderlyn", 'Shrinidhi Thirumalai': "shrinidhit", 'Philip Seger': 'segerphilip', "Elizabeth O'Callaghan": "emocallaghan"}
+groupD = {"HWilk":"HannahWilk","ssingal05":"SiddharthSingal","jwoo1123":"JamesWoo","griffint":"GriffinTschurwald","InseongJoe":"InseongJoe","aloverso":"AnneLoVerso","RRameshwar":"RaaginiRameshwar","flymperopoulos":"FilippsLymperopoulos","runnersaw":"SawyerVaughan","lvanderlyn":"LindseyVanderlyn","shrinidhit":"ShrinidhiThirumalai","segerphilip":"PhilipSeger","emocallaghan":"ElizabethO'Callaghan"}
 
-missing = ["DannyKang", "Duncan Michael"]
+missing = ["DannyKang","DuncanMichael"]
