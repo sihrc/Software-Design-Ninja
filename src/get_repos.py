@@ -20,7 +20,7 @@ def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
 	print "Loaded %i of %i successfully" % (len(users) - len(failed), len(users))
 	print "Failed user ids: %s" % failed
 
-def get_repos(users, names, syspath=os.path.join("..","repos"), url="https://github.com/%s/SoftwareDesign.git"):
+def get_repos(users, names, syspath="repos", url="https://github.com/%s/SoftwareDesign.git"):
 	"""
 	Recursively removes previous copies of the repo (requires user confirmation)
 	Clones the repos from the urls to a folder called repos/<username>
@@ -40,7 +40,7 @@ def get_repos(users, names, syspath=os.path.join("..","repos"), url="https://git
 			Repo.clone_from(url % (uid), path)
 	print "Successfully cloned repos"
 
-def pull_repos(syspath=os.path.join("..","repos")):
+def pull_repos(syspath="repos"):
 	"""
 	Pulls from remote for all directories under syspath
 	"""
