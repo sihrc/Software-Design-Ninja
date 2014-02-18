@@ -91,3 +91,8 @@ def crossReference(students,userse):
     match[full].sort(key = itemgetter(1))
     match[full] = match[full][:2]
   return match
+
+# aliases
+test = test_urls
+clone = clone_repos
+pull = pull_repos
