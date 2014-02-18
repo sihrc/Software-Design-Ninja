@@ -1,4 +1,4 @@
-import get_repos as git
+import gitpy as git
 import modules
 import roster
 import os
@@ -36,9 +36,9 @@ class Test:
 
 if __name__ == "__main__":
 	students = roster.groupD
-	#git.get_repos(students.keys(), students)
-	modules.createRefs("hw3")
-	import repos # this must be run after modules.createRefs
+	git.get_repos(students.keys(), students)
+	#modules.createRefs("hw3")
+	#import repos # this must be run after modules.createRefs
 	#for student, repo in students.iteritems():
 		#TO-DO RUN TESTS HERE - finish a better Tester Class
 		# exec("import repos." + repo + ".hw3.gene_finder as source")

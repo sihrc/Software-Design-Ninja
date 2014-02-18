@@ -21,7 +21,7 @@ def test_urls (users, url="https://github.com/%s/SoftwareDesign"):
   print "Loaded %i of %i successfully" % (len(users) - len(failed), len(users))
   print "Failed user ids: %s" % failed
 
-def clone_repos(students, syspath="../repos/", url="git@github.com:%s/SoftwareDesign.git"):
+def clone_repos(students, syspath=os.path.join("..","repos"), url="git@github.com:%s/SoftwareDesign.git"):
   """
   Recursively removes previous copies of the repo (requires user confirmation)
   Clones the repos from the urls to a folder called repos/<username>
