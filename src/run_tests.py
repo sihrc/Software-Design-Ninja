@@ -20,9 +20,9 @@ def test_func(func):
 	return wrapper
 	
 if __name__ == "__main__":
-	students = roster.groupD
+	students = roster.groupA
 	git.get_repos(students.keys(), students)
 
-	for student, repo in students:
-		exec("import repos." + repo)
+	#for student, repo in students:
+	#	exec("import repos." + repo)
 	
